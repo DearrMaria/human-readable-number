@@ -3,7 +3,7 @@ module.exports = function toReadable (number) {
     return "zero";
     
     let units9 = ["","one","two","three","four","five","six","seven","eight","nine"];
-    let units19 = ["ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
+    let units19 = ["","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
     let dozens = ["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
     let hundreds = ["hundred"]   
 
