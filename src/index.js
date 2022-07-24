@@ -1,11 +1,11 @@
 module.exports = function toReadable (number) {
     if (number === 0) {
-    return "Zero";
+    return "zero";
     
-    let units9 = ["","One","Two","Three","Four","Five","Six","Seven","Eight","Nine"];
-    let units19 = ["Ten","Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
-    let dozens = ["","","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
-    let hundreds = ["Hundred"]   
+    let units9 = ["","one","two","three","four","five","six","seven","eight","nine"];
+    let units19 = ["ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
+    let dozens = ["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
+    let hundreds = ["hundred"]   
 
     let result='';
 
