@@ -1,31 +1,53 @@
 module.exports = function toReadable (number) {
     if (number === 0) {
     return "zero";
+
+        1: 'one',
+        2: 'two',
+        3: 'three',
+        4: 'four',
+        5: 'five',
+        6: 'six',
+        7: 'seven',
+        8: 'eight',
+        9: 'nine',
+        10: 'ten',
+        11: 'eleven',
+        12: 'twelve',
+        13: 'thirteen',
+        14: 'fourteen',
+        15: 'fifteen',
+        16: 'sixteen',
+        17: 'seventeen',
+        18: 'eighteen',
+        19: 'nineteen',
+        20: 'twenty',
+        30: 'thirty',
+        40: 'forty',
+        50: 'fifty',
+        60: 'sixty',
+        70: 'seventy',
+        80: 'eighty',
+        90: 'ninety',
+        100: 'hundred'
+    };
+
+    let humanReadbleNumber = ''
+
+    if (Math.floor(number/100) > 0 && number%100 === 0) {
+        return readableNumbers[Math.floor(number/100)] + ' ' + readableNumbers[100];
+    } else if (Math.floor(number/100) > 0) {
+        humanReadbleNumber += readableNumbers[Math.floor(number/100)]  + ' ' + readableNumbers[100] + ' ';
+        number = number % 100;
+    }
+
+    if (number <= 20 || number%10 === 0) {
+        humanReadbleNumber += readableNumbers[number];
+    } else  {
+        humanReadbleNumber += readableNumbers[Math.floor(number - number%10)] + ' ';
+        number = number % 10;
+        humanReadbleNumber += readableNumbers[number];
+    }
     
-    let units9 = ["","one","two","three","four","five","six","seven","eight","nine"];
-    let units19 = ["","ten","eleven","twelve","thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
-    let dozens = ["","","twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
-    let hundreds = ["hundred"]   
-
-    let result='';
-
-    }
-    else if (number>0 && number<10) {
-        return result=units9[number];
-    }
-    else if (number>=10 && number<20) {
-        return result=units19[number-10];
-    }
-    else if (number>=20 && number<100 && number%10==0) {
-        return result=dozens[Math.floor(number/10)];
-    }
-    else if (number>=10 && number<100 && number%10!=0) {
-        return result=dozens[Math.floor(number/10)]+''+ units9[number%10];
-    }
-    else if (number>=100 && number<1000 && number%100==0) {
-        return result=units9[Math.floor(number/100)]+ hundreds[0];
-    }
-    else if (number>=100 && number<1000 && number%100!=0) {
-        return result=units9[Math.floor(number/100)]+ hundreds[0]+dozens[number % 100]+ units9[number % 100-10];
-    }  
+    return humanReadbleNumber
 }
