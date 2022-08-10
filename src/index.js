@@ -1,53 +1,41 @@
-module.exports = function toReadable (number) {
-    if (number === 0) {
-    return "zero";
 
-        1: 'one',
-        2: 'two',
-        3: 'three',
-        4: 'four',
-        5: 'five',
-        6: 'six',
-        7: 'seven',
-        8: 'eight',
-        9: 'nine',
-        10: 'ten',
-        11: 'eleven',
-        12: 'twelve',
-        13: 'thirteen',
-        14: 'fourteen',
-        15: 'fifteen',
-        16: 'sixteen',
-        17: 'seventeen',
-        18: 'eighteen',
-        19: 'nineteen',
-        20: 'twenty',
-        30: 'thirty',
-        40: 'forty',
-        50: 'fifty',
-        60: 'sixty',
-        70: 'seventy',
-        80: 'eighty',
-        90: 'ninety',
-        100: 'hundred'
-    };
+module.exports = function toReadable(number) {
+    let digits1 = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+    let digits2 = [ 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
+    let digits3 = ['dummy1', 'dummy2', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety']
 
-    let humanReadbleNumber = ''
-
-    if (Math.floor(number/100) > 0 && number%100 === 0) {
-        return readableNumbers[Math.floor(number/100)] + ' ' + readableNumbers[100];
-    } else if (Math.floor(number/100) > 0) {
-        humanReadbleNumber += readableNumbers[Math.floor(number/100)]  + ' ' + readableNumbers[100] + ' ';
-        number = number % 100;
+    if (number.toString().length == 1) {
+        return digits1[number]
     }
 
-    if (number <= 20 || number%10 === 0) {
-        humanReadbleNumber += readableNumbers[number];
-    } else  {
-        humanReadbleNumber += readableNumbers[Math.floor(number - number%10)] + ' ';
-        number = number % 10;
-        humanReadbleNumber += readableNumbers[number];
+    if (number.toString().length == 2 && number < 20) {
+        return digits2[number - 10]
     }
-    
-    return humanReadbleNumber
+
+    if (number.toString().length == 2 && number >= 20) {
+        let rank10s = number.toString()[0];
+        let rank1s = number.toString()[1];
+        if (rank1s != 0) {
+            return digits3[rank10s] + ' ' + digits1[rank1s];
+        }
+        return digits3[rank10s];
+    }
+
+    if (number.toString().length == 3) {
+        let rank100s = number.toString()[0];
+        let rank10s = number.toString()[1];
+        let rank1s = number.toString()[2];
+
+        if (rank1s == 0 && rank10s == 0) {    //200-900 rounds        
+            return digits1[rank100s] + ' hundred'; // 100 & 200-900 (rounds)
+        } else if (rank10s == 0) {
+            return   digits1[rank100s] + ' hundred ' + digits1[rank1s]; // x01-x09
+        } else if (rank1s == 0 && rank10s != 1 ) { // xx0
+            return  digits1[rank100s] + ' hundred ' + digits3[rank10s];
+        } else if(rank10s == 1) {
+            return digits1[rank100s] + ' hundred ' + digits2[rank1s];
+        }
+        return digits1[rank100s] + ' hundred ' + digits3[rank10s] + ' ' + digits1[rank1s];
+
+    }  
 }
